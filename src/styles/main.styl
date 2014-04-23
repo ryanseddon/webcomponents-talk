@@ -1,0 +1,263 @@
+@import 'nib' // CSS3 extensions for Stylus: http://visionmedia.github.io/nib/
+
+@import url('http://fonts.googleapis.com/css?family=Montserrat:700')
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700')
+@import url('http://fonts.googleapis.com/css?family=Englebert')
+
+// variables!
+
+slide_width = 640px
+slide_height = 480px
+slide_background = #000
+
+slide_font_family = "Englebert", sans-serif
+slide_font_heading = "Montserrat", Impact, sans-serif
+
+slide_transition_length = .6s
+slide_transition_easing = ease
+slide_transition_rotate_y = 90deg
+// Safari bugs out on 3d transform-origins, so we have to fake it
+slide_transition_nudge_x = -100px
+
+bullet_transition_length = .3s
+bullet_transition_easing = ease
+bullet_transition_translate_x = 16px
+
+// base
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+@media print
+  *
+    -webkit-print-color-adjust: exact
+
+@page
+  size: landscape
+  margin: 0
+
+// bespoke.js layout styles
+
+article
+  transition: background slide_transition_length slide_transition_easing
+  display: none
+  &.bespoke-parent
+    display: block
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    overflow: hidden
+    @media print
+      overflow: visible
+      position: static
+    perspective: 600px
+
+.bespoke-slide
+  transition:
+    opacity slide_transition_length slide_transition_easing
+  transform-origin: 50% 50% 0
+  backface-visibility: hidden
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  width: slide_width
+  height: slide_height
+  position: absolute
+  top: 50%
+  margin-top: (slide_height / 2) * -1
+  left: 50%
+  margin-left: (slide_width / 2) * -1
+  background: slide_background
+  padding: 40px
+  border-radius: 0
+  font-family: slide_font_family
+  @media print
+    zoom: 1 !important // disable bespoke-scale
+    height: 743px // seems to correspond with an A4, landscape page height
+    width: 100%
+    page-break-before: always
+    position: static
+    margin: 0
+
+.bespoke-after
+  @media print
+    transform: none
+
+.bespoke-inactive
+  opacity: 0
+  pointer-events: none
+  @media print
+    opacity 1
+
+.bespoke-active
+  opacity: 1
+
+// bespoke-bullet styles
+
+.bespoke-bullet
+  transition: all bullet_transition_length bullet_transition_easing
+
+.bespoke-bullet-inactive
+  opacity: 0
+  li&
+    transform: translateX(bullet_transition_translate_x)
+  @media print
+    opacity: 1
+
+.bespoke-bullet-active
+  opacity: 1
+
+// bespoke-scale styles
+
+.bespoke-scale-parent
+  perspective: 600px
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  @media print
+    transform: none !important
+
+// bespoke-progress styles
+
+.bespoke-progress-parent
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 2px
+  @media only screen and (min-width: 1366px)
+    height: 4px
+  @media print
+    display: none
+
+.bespoke-progress-bar
+  transition: width .6s ease
+  position: absolute
+  height: 100%
+  background: #0089f3
+  border-radius: 0 4px 4px 0
+
+// bespoke-state styles
+
+.emphatic,
+.emphatic .bespoke-slide
+  background: slide_background
+
+// prism styles
+
+pre
+  padding: 26px !important
+  border-radius: 8px
+
+// content styles
+
+body
+  font-family: helvetica, arial, sans-serif
+  font-size: 18px
+  color: #fff
+  background: #000
+
+h1
+  font-size: 52px
+  line-height: 82px
+  letter-spacing: -2px
+  margin-bottom: 16px
+
+h2
+  font-size: 42px
+  letter-spacing: -1px
+  margin-bottom: 8px
+
+h3
+  font-size: 24px
+  font-weight: normal
+  margin-bottom: 24px
+  color: #606060
+
+h1, h2, h3, h4
+  color: #fff
+  font-family: slide_font_heading
+
+h1 + h2, h3, li
+  color: #fa7602
+
+.cursive
+  font-family: slide_font_family
+
+hr
+  visibility: hidden
+  height: 20px
+
+ul
+  list-style: none
+  text-align: left
+
+li
+  margin-bottom: 6px
+  line-height: 1.3
+
+p
+  margin: 0 100px 12px
+  line-height: 22px
+
+a
+  color: #0089f3
+  text-decoration: none
+
+.circle
+  border-radius: 50%
+
+.text-right
+  align-self: flex-end
+
+blockquote
+  text-align: left
+  border-left: 10px solid #fa7602
+  margin: 1.5em 10px
+  padding: 0.5em 10px
+  quotes: "\201C""\201D""\2018""\2019"
+  &:before
+    color: #fa7602
+    content: open-quote
+    font-size: 4em
+    line-height: 0.1em
+    margin-right: 0.1em
+    vertical-align: -0.4em
+    font-family: serif
+  p
+    margin: 0
+    display: inline
+
+.zendesk
+  background: url(../assets/zendesk.png) 0 0 no-repeat;
+  background-size: cover
+  .bespoke-slide
+    background: transparent
+
+.list-header, .list-section, .list-section-header, .list-item
+  background: rgba(255, 0, 0, 0.5)
+  width: 52px
+  height: 52px
+  position: absolute
+  top: 22px
+  left: 6px
+.list-section, .list-section-header, .list-item
+  width: auto
+  right: 6px
+  left: 60px
+
+.list-section-header
+  background: rgba(15, 240, 141, 0.5)
+  height: 28px
+.list-item
+  background: rgba(173, 0, 255, 0.5)
+  top: 50px
+  height: 24px

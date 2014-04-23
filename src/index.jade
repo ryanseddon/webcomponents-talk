@@ -1,0 +1,410 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Web Components
+
+    // build:css styles/styles.css
+    //- Check out 'src/bower_components/prism/themes/' for available themes
+    link(rel='stylesheet', type='text/css', href='bower_components/prism/themes/prism-tomorrow.css')
+    link(rel='stylesheet', type='text/css', href='styles/main.css')
+    // endbuild
+
+  body
+
+    article
+
+      section
+        h1 The Composable Web
+        h3.text-right.cursive with Web Components
+
+      section
+        img(src='assets/headshot2.jpg', class='circle', width='200', height='200')
+        hr
+        h3.cursive @ryanseddon
+
+      section
+        img(src='assets/web-component-cats.jpg', height='80%', alt='Web Components is made up of Templates, Custom Elements, Shadow DOM and imports')
+
+      section
+        h2 Templates
+        pre
+          code.language-markup.
+            &lt;template>
+              &lt;h1>User&lt;/h1>
+              &lt;img src="avatar.jpg" />
+              &lt;script>console.log("user");&lt;/script>
+            &lt;/template>
+
+      section
+        h2 Templates
+        hr
+        ul
+          li Inert DOM
+          li Parsed but not rendered
+          li Queryable
+          li Won't load assets until inserted
+
+      section
+        a(class="jsbin-embed", href="http://jsbin.com/jivow/latest/embed?js,output") JS Bin
+        script(src="http://static.jsbin.com/js/embed.js")
+
+      section
+        h2 Custom Elements
+        pre
+          code.language-markup.
+            &lt;x-reverse>&lt;/x-reverse>
+
+      section
+        h2 Custom Elements
+        hr
+        ul
+          li Define new elements
+          li Lifecycle events
+          li Extend exisiting elements
+          li Abstract away complexity
+          li Must have a hyphen
+
+      section
+        h2 Register Custom Element
+        pre
+          code.language-javascript.
+            var XReverse = document.registerElement('x-reverse');
+
+      section
+        h2 Prototype Custom Element
+        pre
+          code.language-javascript.
+            var XReversePrototype = Object.create(HTMLElement.prototype);
+
+            var XReverse = document.registerElement('x-reverse', {
+              prototype: XReversePrototype
+            });
+
+      section
+        h2 Lifecycle events
+        hr
+        ul
+          li createdCallback()
+          li attachedCallback()
+          li detachedCallback()
+          li attributeChangeCallback()
+
+      section
+        a(class="jsbin-embed", href="http://jsbin.com/sireb/latest/embed?js") JS Bin
+        script(src="http://static.jsbin.com/js/embed.js")
+
+      section
+        h2 Shadow DOM
+
+      section
+        img(src='assets/shadow-dom.png' width='80%')
+
+      section
+        h2 Shadow DOM
+        hr
+        ul
+          li Encapsulation
+          li Hidden subtree
+          li Encapsulated styles
+          li events are retargetted
+          li iframe without the baggage*
+
+      section
+        a(class="jsbin-embed", href="http://jsbin.com/quraw/latest/embed?js,output") JS Bin
+        script(src="http://static.jsbin.com/js/embed.js")
+
+      section
+        h2 Shadow DOM elements
+        hr
+        ul
+          li &lt;content>&lt;/content>
+          li &lt;shadow>&lt;/shadow>
+
+      section
+        h2 Shadow DOM CSS
+        hr
+        ul
+          li :host & :host(&lt;selector>) { } - Host element styles
+          li :host-context(&lt;selector>) {} - Ancestor theming
+          li ::shadow & /deep/ {} - Shadow DOM styles
+          li ::content {} - Distributed content
+
+      section
+        h2 Imports
+        pre
+          code.language-markup.
+            &lt;link rel="import" href="media-object.html">
+
+      section
+        h2 Imports
+        hr
+        ul
+          li Easy mechanism to bring in a component for use
+          li Component can import more components
+          li Asynchronous request*
+
+      section
+        h2 Composability
+        hr
+        h3.cursive A component should do one thing well
+
+      section
+        h2 Unix philosophy
+        blockquote
+          p Emphasize building short, simple, clear, modular, and extendable code that can be easily maintained and repurposed by developers other than its creators.
+        p.text-right &mdash; Wikipedia
+
+      section
+        h2 Example
+
+      section(data-bespoke-state="zendesk")
+
+      section
+        div(style="position: relative")
+          img(src="assets/zendesk_mo.png", width="100%")
+          ul
+            li &nbsp;
+            li.list-header &nbsp;
+            li.list-section &nbsp;
+            li.list-section-header &nbsp;
+            li.list-item &nbsp;
+
+      section
+        pre
+          code.language-markup.
+            &lt;media-object>&lt;/media-object>
+
+      section
+        pre
+          code.language-markup.
+            &lt;media-object>
+              &lt;x-avatar>&lt;/x-avatar>
+            &lt;/media-object>
+
+      section
+        pre
+          code.language-markup.
+            &lt;media-object>
+              &lt;img is="x-avatar" />
+            &lt;/media-object>
+      section
+        pre
+          code.language-markup.
+            &lt;media-object>
+              &lt;img is="x-avatar" />
+              &lt;mo-body>&lt;/mo-body>
+            &lt;/media-object>
+
+      section
+        pre
+          code.language-markup.
+            &lt;media-object>
+              &lt;img is="x-avatar" />
+              &lt;mo-body>
+                &lt;mo-header>&lt;/mo-header>
+              &lt;/mo-body>
+            &lt;/media-object>
+
+      section
+        pre
+          code.language-markup.
+            &lt;media-object>
+              &lt;img is="x-avatar" />
+              &lt;mo-body>
+                &lt;mo-header>&lt;/mo-header>
+                &lt;mo-content>&lt;/mo-content>
+              &lt;/mo-body>
+            &lt;/media-object>
+
+      section
+        h2 x-avatar
+        pre
+          code.language-javascript.
+            document.registerElement('x-avatar', {
+              prototype: Object.create(HTMLImageElement.prototype),
+              extends: 'img'
+            });
+
+      section
+        pre
+          code.language-javascript.
+            var XAvatarPrototype = Object.create(HTMLImageElement.prototype);
+
+            XAvatarPrototype.createdCallback = function() {
+              var data = this.dataset,
+                  username = data.username,
+                  service = data.service,
+                  url = 'http://avatars.io/' + service + '/' + username;
+
+              this.src = url;
+            };
+
+      section
+        pre
+          code.language-markup.
+            &lt;img
+              is="x-avatar"
+              data-service="twitter"
+              data-username="ryanseddon"
+            />
+
+      section
+        h2 media-object
+        ul
+          li Imports avatar
+          li Needs some baseline styles
+
+      section
+        pre
+          code.language-markup.
+            &lt;link rel="import" href="x-avatar.html">
+
+      section
+        h2 Register media-object, mo-body, mo-header, mo-content
+        pre
+          code.language-javascript.
+            document.registerElement('...');
+
+      section
+        h2 Encapsulate styles
+        pre
+          code.language-javascript.
+            MediaObjectElementPrototype.createdCallback = function() {
+              this.createShadowRoot().innerHTML = styles + '&lt;content>&lt;/content>';
+            }
+
+      section
+        h2 That "styles" var
+        pre
+          code.language-css.
+            :host {
+              display: flex;
+            }
+            ::content mo-body {
+              flex: 1;
+            }
+
+      section
+        h2 :host and ::content
+        ul
+          li :host allows you to target the shadow DOM host element
+          li ::content allows you to target distributed content
+
+      section
+        a(class="jsbin-embed", href="http://jsbin.com/wexom/latest/embed?js") JS Bin
+        script(src="http://static.jsbin.com/js/embed.js")
+
+      section
+        h2 Web Components API
+        p Starts to show warts with the underlying API
+
+      section
+        h2.bullet
+          img(src="http://www.polymer-project.org/images/logos/lockup.svg")
+        ul
+          li Platform.js polyfills
+          li Layer on top
+          li Declarative syntax
+          li data-binding
+          li Dynamic templates
+          li Much, much more
+
+      section
+        h2 Polymer media-object
+        pre
+          code.language-markup.
+            &lt;polymer-element name="media-object" noscript>
+              &lt;template>
+                &lt;!--// Shadow DOM -- >
+                &lt;link rel="stylesheet" href="media-object.css">
+              &lt;/template>
+            &lt;/polymer-element>
+
+      section
+        a(class="jsbin-embed", href="http://jsbin.com/cihoc/latest/embed?html,output") JS Bin
+        script(src="http://static.jsbin.com/js/embed.js")
+
+      section
+        h2
+          a(href="http://mozilla.github.io/brick/") Mozilla Brick
+        blockquote
+          p  reusable UI components created to enable rapid development of cross-browser and mobile-friendly HTML5 web applications.
+
+      section
+        h2.bullet Composability in mind
+        hr
+        ul
+          li Built on underlying X-Tag library
+          li X-Tag and Polymer use the same polyfills
+
+      section
+        img(src="assets/sunshine.jpg")
+
+      section
+        img(src="assets/no.jpg")
+
+      section
+        h2 Web Component issues
+
+      section
+        h2 Namespacing
+        hr
+        ul
+          li Global pollution
+          li Can't tie elements together think &lt;option> in &lt;select>
+
+      section
+        h2 Dependency management
+        hr
+        ul
+          li How can I get components that use the same library to share?
+          li What about component A using jQuery 1.x and component B using 2.x
+          li Could solve through agreement of CDN usage?
+
+      section
+        h2 Accessibility, Performance & Security
+
+      section
+        ul
+          li As a consumer how will I know these are considered?
+          li As a developer how can I make sure these a big factors?
+
+      section
+        h2 Not all doom and gloom
+        h3
+          a(href="http://webcomponents.github.io/") webcomponents.org
+
+      section
+        blockquote
+          p ...where pioneers and community-members of the Web Components ecosystem document web components best practices...
+
+      section
+        h2 Web Components you can trust
+        img(src="assets/abed.gif")
+
+      section
+        h2 Takeways
+        ul
+          li Polymers platform.js allows you to build today
+          li Same with x-tag
+          li Chrome and Firefox are rapidly adding native support
+
+      section
+        h2 Thanks
+        h3 @ryanseddon
+
+    // build:js scripts/scripts.js
+    script(src='bower_components/bespoke.js/dist/bespoke.min.js')
+    script(src='bower_components/bespoke-keys/dist/bespoke-keys.min.js')
+    script(src='bower_components/bespoke-touch/dist/bespoke-touch.min.js')
+    script(src='bower_components/bespoke-bullets/dist/bespoke-bullets.min.js')
+    script(src='bower_components/bespoke-scale/dist/bespoke-scale.min.js')
+    script(src='bower_components/bespoke-hash/dist/bespoke-hash.min.js')
+    script(src='bower_components/bespoke-progress/dist/bespoke-progress.min.js')
+    script(src='bower_components/bespoke-state/dist/bespoke-state.min.js')
+    script(src='bower_components/bespoke-forms/dist/bespoke-forms.min.js')
+    script(src='bower_components/prism/prism.js')
+    script(src='scripts/main.js')
+    // endbuild
