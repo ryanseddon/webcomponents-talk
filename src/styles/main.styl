@@ -236,11 +236,13 @@ blockquote
     margin: 0
     display: inline
 
-.zendesk
-  background: url(../assets/zendesk.png) 0 0 no-repeat;
-  background-size: cover
+.zendesk, .zendesk-pattern
+  background: url(../assets/zendesk.png) 0 center no-repeat;
+  background-size: 100% auto
   .bespoke-slide
     background: transparent
+.zendesk-pattern
+  background-image: url(../assets/zendesk_mo-pattern.jpg)
 
 .list-header, .list-section, .list-section-header, .list-item
   background: rgba(255, 0, 0, 0.5)
@@ -253,7 +255,6 @@ blockquote
   width: auto
   right: 6px
   left: 60px
-
 .list-section-header
   background: rgba(15, 240, 141, 0.5)
   height: 28px
