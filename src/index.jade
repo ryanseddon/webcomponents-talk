@@ -62,7 +62,7 @@ html
         ul
           li Define new elements
           li Lifecycle events
-          li Extend exisiting elements
+          li Extend existing elements
           li Abstract away complexity
           li Must have a hyphen
 
@@ -76,20 +76,30 @@ html
         h2 Prototype Custom Element
         pre
           code.language-javascript.
-            var XReversePrototype = Object.create(HTMLElement.prototype);
-
             var XReverse = document.registerElement('x-reverse', {
-              prototype: XReversePrototype
+              prototype: Object.create(HTMLElement.prototype);
             });
 
       section
-        h2 Lifecycle events
+        h2.bullet Lifecycle events
         hr
         ul
           li createdCallback()
           li attachedCallback()
           li detachedCallback()
           li attributeChangedCallback()
+
+      section
+        h2 Custom Element FOUC?
+        pre
+          code.language-css.
+            x-reverse:unresolved {
+              opacity: 0;
+            }
+            x-reverse {
+              transition: opacity 0.5s;
+              opacity: 1;
+            }
 
       section
         a(class="jsbin-embed", href="http://jsbin.com/sireb/latest/embed?js") JS Bin
@@ -108,8 +118,8 @@ html
           li Encapsulation
           li Hidden subtree
           li Encapsulated styles
-          li events are retargetted
-          li iframe without the baggage*
+          li events are retargeted
+          li iFrame without the baggage*
 
       section
         a(class="jsbin-embed", href="http://jsbin.com/quraw/latest/embed?js,output") JS Bin
@@ -127,7 +137,8 @@ html
         h2 Shadow DOM CSS
         hr
         ul
-          li :host & :host(&lt;selector>) { } - Host element styles
+          li :host & :host(&lt;selector>) {} - Host element styles
+          li :host(:hover) {} allows you to react to user state
           li :host-context(&lt;selector>) {} - Ancestor theming
           li ::shadow & /deep/ {} - Shadow DOM styles
           li ::content {} - Distributed content
@@ -145,6 +156,7 @@ html
           li Easy mechanism to bring in a component for use
           li Component can import more components
           li Asynchronous request*
+          li Easily distributed through bower or npm
 
       section
         h2 Composability
@@ -296,9 +308,19 @@ html
             :host {
               display: flex;
             }
+            ::content [is="x-avatar"] {
+              margin-right: 15px;
+            }
             ::content mo-body {
               flex: 1;
             }
+
+      section
+        h2 No classes
+        hr
+        ul
+          li Baseline styles like browser user stylesheets
+          li Stick to element and attribute selectors
 
       section
         h2 :host and ::content
@@ -313,13 +335,14 @@ html
       section
         h2 Web Components API
         hr
-        p Starts to show warts with the underlying API
+        p Starts to get a little verbose but that's on purpose
         p
           a(href="http://extensiblewebmanifesto.org/") extensiblewebmanifesto.org
 
       section
         h2.bullet
-          img(src="http://www.polymer-project.org/images/logos/lockup.svg")
+          a(href="http://polymer-project.org/")
+            img(src="http://www.polymer-project.org/images/logos/lockup.svg", width="400")
         ul
           li Platform.js polyfills
           li Layer on top
@@ -340,8 +363,8 @@ html
             &lt;/polymer-element>
 
       section
-        a(class="jsbin-embed", href="http://jsbin.com/cihoc/latest/embed?html,output") JS Bin
-        script(src="http://static.jsbin.com/js/embed.js")
+        h2
+          a(href="http://jsbin.com/cihoc/latest") &lt;media-object> demo
 
       section
         h2
@@ -373,7 +396,7 @@ html
       section
         h2 Web Component issues
 
-      sectionjhk
+      section
         h2 Namespacing
         hr
         ul
@@ -394,28 +417,28 @@ html
       section
         ul
           li As a consumer how will I know these are considered?
-          li As a developer how can I make sure these a big factors?
+          li As a developer how can I make sure these are big factors?
 
       section
         h2 Not all doom and gloom
         h3
-          a(href="http://webcomponents.github.io/") webcomponents.org
+          a(href="https://github.com/webcomponents/webcomponents.github.io") webcomponents.org
 
       section
         blockquote
           p ...where pioneers and community-members of the Web Components ecosystem document web components best practices...
 
       section
-        h2 Web Components you can trust
-        img(src="assets/abed.gif")
+        h2 The goto place for Web Components
 
       section
         h2 Takeaways
         ul
-          li Composability makes for better applications
+          li Web Components lend themselves to composability
           li Polymers platform.js allows you to build today
           li Same with x-tag
-          li Chrome and Firefox are rapidly adding native support
+          li Spec is rapidly changing be careful what you build
+          li Chrome & Firefox are rapidly adding native support
 
       section
         h2 Go forth & compose
