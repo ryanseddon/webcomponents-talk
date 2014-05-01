@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Web Components</title>
+    <link rel="stylesheet" href="styles/styles.css"/>
+  </head>
+  <body>
+    <article>
+      <section>
+        <h1>The Composable Web</h1>
+        <h3 class="text-right cursive">with Web Components</h3>
+      </section>
+      <section><img src="assets/headshot2.jpg" width="200" height="200" class="circle">
+        <hr>
+        <h3 class="cursive">@ryanseddon</h3>
+      </section>
+      <section><img src="assets/web-component-cats.jpg" height="80%" alt="Web Components is made up of Templates, Custom Elements, Shadow DOM and imports"></section>
+      <section>
+        <h2>Templates</h2>
+        <pre><code class="language-markup">&lt;template>
+  &lt;h1>User&lt;/h1>
+  &lt;img src="avatar.jpg" />
+  &lt;script>console.log("user");&lt;/script>
+&lt;/template>
+</code></pre>
+      </section>
+      <section>
+        <h2>Templates</h2>
+        <hr>
+        <ul>
+          <li>Inert DOM</li>
+          <li>Parsed but not rendered</li>
+          <li>Queryable</li>
+          <li>Won't load assets until inserted</li>
+        </ul>
+      </section>
+      <section><a href="http://jsbin.com/jivow/latest/embed?js,output" class="jsbin-embed">JS Bin</a>
+        <script src="http://static.jsbin.com/js/embed.js"></script>
+      </section>
+      <section>
+        <h2>Custom Elements</h2>
+        <pre><code class="language-markup">&lt;x-reverse>&lt;/x-reverse>
+</code></pre>
+      </section>
+      <section>
+        <h2>Custom Elements</h2>
+        <hr>
+        <ul>
+          <li>Define new elements</li>
+          <li>Lifecycle events</li>
+          <li>Extend existing elements</li>
+          <li>Abstract away complexity</li>
+          <li>Must have a hyphen</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Register Custom Element</h2>
+        <pre><code class="language-javascript">var XReverse = document.registerElement('x-reverse');
+</code></pre>
+      </section>
+      <section>
+        <h2>Prototype Custom Element</h2>
+        <pre><code class="language-javascript">var XReverse = document.registerElement('x-reverse', {
+  prototype: Object.create(HTMLElement.prototype);
+});
+</code></pre>
+      </section>
+      <section>
+        <h2 class="bullet">Lifecycle events</h2>
+        <hr>
+        <ul>
+          <li>createdCallback()</li>
+          <li>attachedCallback()</li>
+          <li>detachedCallback()</li>
+          <li>attributeChangedCallback()</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Custom Element FOUC?</h2>
+        <pre><code class="language-css">x-reverse:unresolved {
+  opacity: 0;
+}
+x-reverse {
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+</code></pre>
+      </section>
+      <section><a href="http://jsbin.com/sireb/latest/embed?js" class="jsbin-embed">JS Bin</a>
+        <script src="http://static.jsbin.com/js/embed.js"></script>
+      </section>
+      <section>
+        <h2>Shadow DOM</h2>
+      </section>
+      <section><img src="assets/shadow-dom.png" width="80%"></section>
+      <section>
+        <h2>Shadow DOM</h2>
+        <hr>
+        <ul>
+          <li>Encapsulation</li>
+          <li>Hidden subtree</li>
+          <li>Encapsulated styles</li>
+          <li>events are retargeted</li>
+          <li>iFrame without the baggage*</li>
+        </ul>
+      </section>
+      <section><a href="http://jsbin.com/quraw/latest/embed?js,output" class="jsbin-embed">JS Bin</a>
+        <script src="http://static.jsbin.com/js/embed.js"></script>
+      </section>
+      <section>
+        <h2>Shadow DOM elements</h2>
+        <hr>
+        <ul>
+          <li>&lt;content>&lt;/content></li>
+          <li>&lt;conent select="section:nth-child(1)">&lt;/content></li>
+          <li>&lt;shadow>&lt;/shadow></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Shadow DOM CSS</h2>
+        <hr>
+        <ul>
+          <li>:host & :host(&lt;selector>) {} - Host element styles</li>
+          <li>:host(:hover) {} allows you to react to user state</li>
+          <li>:host-context(&lt;selector>) {} - Ancestor theming</li>
+          <li>::shadow & /deep/ {} - Shadow DOM styles</li>
+          <li>::content {} - Distributed content</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Imports</h2>
+        <pre><code class="language-markup">&lt;link rel="import" href="media-object.html">
+</code></pre>
+      </section>
+      <section>
+        <h2>Imports</h2>
+        <hr>
+        <ul>
+          <li>Easy mechanism to bring in a component for use</li>
+          <li>Component can import more components</li>
+          <li>Asynchronous request*</li>
+          <li>Easily distributed through bower or npm</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Composability</h2>
+        <hr>
+        <h3 class="cursive">A component should do one thing well</h3>
+      </section>
+      <section>
+        <h2>Unix philosophy</h2>
+        <blockquote>
+          <p>Emphasize building short, simple, clear, modular, and extendable code that can be easily maintained and repurposed by developers other than its creators.</p>
+        </blockquote>
+        <p class="text-right">&mdash; Wikipedia</p>
+      </section>
+      <section>
+        <h2>Example</h2>
+      </section>
+      <section data-bespoke-state="zendesk"></section>
+      <section>
+        <div style="position: relative"><img src="assets/zendesk_mo.png" width="100%">
+          <ul>
+            <li>&nbsp;</li>
+            <li class="list-header">&nbsp;</li>
+            <li class="list-section">&nbsp;</li>
+            <li class="list-section-header">&nbsp;</li>
+            <li class="list-item">&nbsp;</li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <pre><code class="language-markup">&lt;media-object>&lt;/media-object>
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-markup">&lt;media-object>
+  &lt;x-avatar>&lt;/x-avatar>
+&lt;/media-object>
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-markup">&lt;media-object>
+  &lt;img is="x-avatar" />
+&lt;/media-object></code></pre>
+      </section>
+      <section>
+        <pre><code class="language-markup">&lt;media-object>
+  &lt;img is="x-avatar" />
+  &lt;mo-body>&lt;/mo-body>
+&lt;/media-object>
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-markup">&lt;media-object>
+  &lt;img is="x-avatar" />
+  &lt;mo-body>
+    &lt;mo-header>&lt;/mo-header>
+  &lt;/mo-body>
+&lt;/media-object>
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-markup">&lt;media-object>
+  &lt;img is="x-avatar" />
+  &lt;mo-body>
+    &lt;mo-header>&lt;/mo-header>
+    &lt;mo-content>&lt;/mo-content>
+  &lt;/mo-body>
+&lt;/media-object>
+</code></pre>
+      </section>
+      <section data-bespoke-state="zendesk-pattern"></section>
+      <section>
+        <h2>x-avatar</h2>
+        <pre><code class="language-javascript">document.registerElement('x-avatar', {
+  prototype: Object.create(HTMLImageElement.prototype),
+  extends: 'img'
+});
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-javascript">var XAvatarPrototype = Object.create(HTMLImageElement.prototype);
+
+XAvatarPrototype.createdCallback = function() {
+  var data = this.dataset,
+      username = data.username,
+      service = data.service,
+      url = 'http://avatars.io/' + service + '/' + username;
+      
+  this.src = url;
+};
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-markup">&lt;img
+  is="x-avatar"
+  data-service="twitter"
+  data-username="ryanseddon"
+/>
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-javascript">XAvatarElementPrototype.getAvatarURL = function() {
+  // Return avatars.io formatted url
+};
+
+XAvatarElementPrototype.attributeChangedCallback = function(attr) {
+  this.src = this.getAvatarURL();
+};
+</code></pre>
+      </section>
+      <section>
+        <h2>media-object</h2>
+        <ul>
+          <li>Imports x-avatar</li>
+          <li>Needs some baseline styles</li>
+        </ul>
+      </section>
+      <section>
+        <pre><code class="language-markup">&lt;link rel="import" href="x-avatar.html">
+</code></pre>
+      </section>
+      <section>
+        <h2>Register media-object, mo-body, mo-header, mo-content</h2>
+        <pre><code class="language-javascript">document.registerElement('...');
+</code></pre>
+      </section>
+      <section>
+        <h2>Encapsulate styles</h2>
+        <pre><code class="language-javascript">MediaObjectElementPrototype.createdCallback = function() {
+  this.createShadowRoot().innerHTML = styles + '&lt;content>&lt;/content>';
+}
+</code></pre>
+      </section>
+      <section>
+        <h2>That "styles" var</h2>
+        <pre><code class="language-css">:host {
+  display: flex;
+}
+::content [is="x-avatar"] {
+  margin-right: 15px;
+}
+::content mo-body {
+  flex: 1;
+}
+</code></pre>
+      </section>
+      <section>
+        <h2>No classes</h2>
+        <hr>
+        <ul>
+          <li>Baseline styles like browser user stylesheets</li>
+          <li>Stick to element and attribute selectors</li>
+        </ul>
+      </section>
+      <section>
+        <h2>:host and ::content</h2>
+        <ul>
+          <li>:host allows you to target the shadow DOM host element</li>
+          <li>::content allows you to target distributed content</li>
+        </ul>
+      </section>
+      <section><a href="http://jsbin.com/wexom/latest/embed?js" class="jsbin-embed">JS Bin</a>
+        <script src="http://static.jsbin.com/js/embed.js"></script>
+      </section>
+      <section>
+        <h2>Web Components API</h2>
+        <hr>
+        <p>Starts to get a little verbose but that's on purpose</p>
+        <p><a href="http://extensiblewebmanifesto.org/">extensiblewebmanifesto.org</a></p>
+      </section>
+      <section>
+        <h2 class="bullet"><a href="http://polymer-project.org/"><img src="http://www.polymer-project.org/images/logos/lockup.svg" width="400"></a></h2>
+        <ul>
+          <li>Platform.js polyfills</li>
+          <li>Layer on top</li>
+          <li>Declarative syntax</li>
+          <li>data-binding</li>
+          <li>Dynamic templates</li>
+          <li>Much, much more</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Polymer media-object</h2>
+        <pre><code class="language-markup">&lt;polymer-element name="media-object" noscript>
+  &lt;template>
+    &lt;!--// Shadow DOM -- >
+    &lt;link rel="stylesheet" href="media-object.css">
+  &lt;/template>
+&lt;/polymer-element>
+</code></pre>
+      </section>
+      <section>
+        <h2><a href="http://jsbin.com/cihoc/latest">&lt;media-object> demo</a></h2>
+      </section>
+      <section>
+        <h2><a href="http://mozilla.github.io/brick/">Mozilla Brick</a></h2>
+        <blockquote>
+          <p> reusable UI components created to enable rapid development of cross-browser and mobile-friendly HTML5 web applications.</p>
+        </blockquote>
+      </section>
+      <section>
+        <h2 class="bullet">Composability in mind</h2>
+        <hr>
+        <ul>
+          <li>Built on underlying X-Tag library</li>
+          <li>X-Tag and Polymer use the same polyfills</li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="bullet">Frameworks</h2>
+        <hr>
+        <ul>
+          <li>Angular Directives</li>
+          <li>Ember Components</li>
+          <li>React.js</li>
+        </ul>
+      </section>
+      <section><img src="assets/sunshine.jpg"></section>
+      <section><img src="assets/no.jpg"></section>
+      <section>
+        <h2>Web Component issues</h2>
+      </section>
+      <section>
+        <h2>Conflicts and relationships</h2>
+        <hr>
+        <ul>
+          <li>Global pollution</li>
+          <li>Namespacing to avoid conflicts</li>
+          <li>Can't create element relationships think &lt;option> in &lt;select></li>
+        </ul>
+      </section>
+      <section>
+        <h2>XML Namspacing</h2>
+        <pre><code class="language-markup">&lt;namespace:media-object>&lt;/namespace:media-object></code></pre><img src="assets/dry-heave-o.gif">
+      </section>
+      <section>
+        <h2>Dependency management</h2>
+        <hr>
+        <ul>
+          <li>How can I get components that use the same library to share?</li>
+          <li>What about component A using jQuery 1.x and component B using 2.x</li>
+          <li>Could solve through agreement of CDN usage?</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Accessibility, Performance & Security</h2>
+      </section>
+      <section>
+        <ul>
+          <li>As a consumer how will I know these are considered?</li>
+          <li>As a developer how can I make sure these are big factors?</li>
+        </ul>
+      </section>
+      <section data-bespoke-state="wcorg"></section>
+      <section>
+        <blockquote>
+          <p>...where pioneers and community-members of the Web Components ecosystem document web components best practices...</p>
+        </blockquote>
+      </section>
+      <section>
+        <h2>The goto place for<br>Web Components</h2>
+      </section>
+      <section>
+        <h2>Takeaways</h2>
+        <ul>
+          <li>Web Components lend themselves to composability</li>
+          <li>Polymer & X-Tag allows you to build today</li>
+          <li>Spec is rapidly changing be careful what you build</li>
+          <li>Chrome & Firefox are rapidly adding native support</li>
+          <li>Your favourite framework will probably be a layer on top</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Go forth & compose</h2>
+        <h3>@ryanseddon</h3>
+        <h4>Zendesk is hiring come talk to me</h4>
+      </section>
+    </article>
+    <script src="scripts/scripts.js"></script>
+  </body>
+</html>
